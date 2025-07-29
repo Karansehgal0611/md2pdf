@@ -224,7 +224,7 @@ If experiencing issues:
 3. Check browser compatibility list above
 4. Try in an incognito/private window
 
-## Privacy and Security
+## Privacy and Security:
 
 ### Data Handling
 - **Client-side Only**: All processing happens in your browser
@@ -237,7 +237,7 @@ If experiencing issues:
 - **Local File Access**: Standard browser file API usage
 - **Content Privacy**: Your documents remain private and secure
 
-## Support and Development
+## Support and Development:
 
 ### Open Source
 This application is built with open web standards and common libraries:
