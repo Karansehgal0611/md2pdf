@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown PDF Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="app-title">
+                <span class="title-icon">📝</span>
+                .mark2PDF Studio
+            </h1>
+        </div>
+        <div class="header-right">
+            <button class="btn btn--secondary btn--sm" id="settingsBtn" title="Settings">
+                ⚙️
+            </button>
+            <button class="btn btn--secondary btn--sm" id="importBtn" title="Import Markdown">
+                📁
+            </button>
+            <button class="btn btn--primary btn--sm" id="exportPdfBtn" title="Export PDF">
+                📄 PDF
+            </button>
+            <button class="btn btn--outline btn--sm" id="exportMdBtn" title="Export Markdown">
+                💾 MD
+            </button>
+        </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <button class="toolbar-btn" data-action="header1" title="Header 1 (Ctrl+1)">H1</button>
+            <button class="toolbar-btn" data-action="header2" title="Header 2 (Ctrl+2)">H2</button>
+            <button class="toolbar-btn" data-action="header3" title="Header 3 (Ctrl+3)">H3</button>
+        </div>
+        <div class="toolbar-divider"></div>
+        <div class="toolbar-group">
+            <button class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+            <button class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)"><em>I</em></button>
+            <button class="toolbar-btn" data-action="code" title="Code (Ctrl+`)"><code>&lt;/&gt;</code></button>
+        </div>
+        <div class="toolbar-divider"></div>
+        <div class="toolbar-group">
+            <button class="toolbar-btn" data-action="link" title="Link (Ctrl+K)">🔗</button>
+            <button class="toolbar-btn" data-action="image" title="Image (Ctrl+Shift+I)">🖼️</button>
+        </div>
+        <div class="toolbar-divider"></div>
+        <div class="toolbar-group">
+            <button class="toolbar-btn" data-action="list" title="List (Ctrl+L)">•</button>
+            <button class="toolbar-btn" data-action="orderedList" title="Ordered List (Ctrl+Shift+L)">1.</button>
+            <button class="toolbar-btn" data-action="blockquote" title="Blockquote (Ctrl+Q)">&gt;</button>
+        </div>
+        <div class="toolbar-divider"></div>
+        <div class="toolbar-group">
+            <button class="toolbar-btn" data-action="table" title="Table (Ctrl+T)">⊞</button>
+            <button class="toolbar-btn" data-action="hr" title="Horizontal Rule (Ctrl+R)">―</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="editor-panel">
+            <div class="panel-header">
+                <h3>Markdown Editor</h3>
+                <div class="panel-controls">
+                    <button class="btn btn--sm btn--outline" id="clearBtn">Clear</button>
+                </div>
+            </div>
+            <div class="editor-wrapper">
+                <div class="line-numbers" id="lineNumbers"></div>
+                <textarea class="editor" id="markdownEditor" placeholder="Start typing your markdown here..."></textarea>
+            </div>
+        </div>
+        
+        <div class="resize-handle" id="resizeHandle"></div>
+        
+        <div class="preview-panel">
+            <div class="panel-header">
+                <h3>Live Preview</h3>
+                <div class="panel-controls">
+                    <button class="btn btn--sm btn--outline" id="syncScrollBtn" title="Toggle Sync Scroll">🔄</button>
+                </div>
+            </div>
+            <div class="preview-wrapper">
+                <div class="preview" id="preview"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span class="status-item" id="wordCount">Words: 0</span>
+            <span class="status-item" id="charCount">Characters: 0</span>
+            <span class="status-item" id="lineCount">Lines: 0</span>
+        </div>
+        <div class="status-right">
+            <span class="status-item" id="autoSaveStatus">Auto-saved</span>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal hidden" id="settingsModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>PDF Export Settings</h2>
+                <button class="modal-close" id="closeSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-group">
+                    <label class="form-label" for="pageSize">Page Size</label>
+                    <select class="form-control" id="pageSize">
+                        <option value="a4">A4</option>
+                        <option value="letter">Letter</option>
+                        <option value="legal">Legal</option>
+                        <option value="a3">A3</option>
+                        <option value="a5">A5</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <label class="form-label" for="orientation">Orientation</label>
+                    <select class="form-control" id="orientation">
+                        <option value="portrait">Portrait</option>
+                        <option value="landscape">Landscape</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <label class="form-label" for="margins">Margins</label>
+                    <select class="form-control" id="margins">
+                        <option value="none">None</option>
+                        <option value="small">Small (0.5in)</option>
+                        <option value="medium" selected>Medium (1in)</option>
+                        <option value="large">Large (1.5in)</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <label class="form-label" for="fontSize">Font Size</label>
+                    <select class="form-control" id="fontSize">
+                        <option value="8">8px</option>
+                        <option value="9">9px</option>
+                        <option value="10">10px</option>
+                        <option value="11">11px</option>
+                        <option value="12" selected>12px</option>
+                        <option value="14">14px</option>
+                        <option value="16">16px</option>
+                        <option value="18">18px</option>
+                        <option value="20">20px</option>
+                        <option value="24">24px</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="enableAutoSave" checked>
+                        Enable Auto-save
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" id="cancelSettings">Cancel</button>
+                <button class="btn btn--primary" id="saveSettings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="fileInput" accept=".md,.txt,.markdown" style="display: none;">
+
+    <script src="app.js"></script>
+</body>
+</html>
