@@ -4,7 +4,7 @@
 
 The Markdown PDF Converter is a professional, client-side web application that transforms Markdown text into beautifully formatted PDF documents. Built with a clean, technical interface, it provides real-time preview, extensive customization options, and professional-grade PDF export capabilities.
 
-## Key Features
+## Key Features:
 
 ### ✨ Core Functionality
 - **Live Preview**: Real-time rendering of markdown as you type
