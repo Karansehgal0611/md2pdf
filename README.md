@@ -27,7 +27,7 @@ The Markdown PDF Converter is a professional, client-side web application that t
 - **Synchronized Scrolling**: Optional sync between editor and preview panels
 - **Custom PDF Settings**: Configurable page size, margins, and orientation
 
-## How to Use
+## How to Use:
 
 ### Getting Started
 1. **Open the Application**: Navigate to the converter in your web browser
