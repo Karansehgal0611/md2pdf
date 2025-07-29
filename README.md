@@ -88,7 +88,7 @@ Access advanced PDF options through the settings button (⚙️):
 - Consistent typography
 - High-quality rendering
 
-## Markdown Support
+## Markdown Support:
 
 ### Supported Syntax
 
