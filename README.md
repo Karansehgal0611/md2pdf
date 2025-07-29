@@ -157,7 +157,7 @@ Full support for GitHub-flavored markdown including:
 - Automatic URL linking
 - Code syntax highlighting
 
-## Technical Details
+## Technical Details:
 
 ### Technologies Used
 - **Vanilla JavaScript**: No framework dependencies
@@ -178,7 +178,7 @@ Full support for GitHub-flavored markdown including:
 - **Efficient Storage**: Lightweight localStorage usage
 - **Fast PDF Generation**: Optimized conversion process
 
-## Tips and Best Practices
+## Tips and Best Practices:
 
 ### Efficient Workflow
 1. **Use Keyboard Shortcuts**: Master common shortcuts for faster editing
@@ -198,7 +198,7 @@ Full support for GitHub-flavored markdown including:
 3. **Table Usage**: Use tables for tabular data, lists for sequential items
 4. **Code Blocks**: Use appropriate language tags for syntax highlighting
 
-## Troubleshooting
+## Troubleshooting:
 
 ### Common Issues
 
