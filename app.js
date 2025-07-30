@@ -634,10 +634,16 @@ function convertToPDF() {
         
         const element = this.preview;
         const margins = this.marginSettings[this.settings.margins];
+
+        let filename = (document.getElementById('pdf-filename')?.value || 'document.pdf').trim();
+        filename = filename.replace(/[^a-zA-Z0-9._-]/g, '');
+        if (!filename.toLowerCase().endsWith('.pdf')) {
+            filename += '.pdf';
+        }
         
         const opt = {
             margin: margins,
-            filename: 'document.pdf',
+            filename,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
             jsPDF: { 
