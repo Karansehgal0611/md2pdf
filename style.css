@@ -808,6 +808,37 @@ body {
   margin: 0 var(--space-4);
 }
 
+.pdf-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8); /* spacing between label, input, and button */
+  margin-left: auto;   /* push this group to the far right if desired */
+}
+
+.pdf-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-right: var(--space-2);
+  white-space: nowrap;
+}
+
+.pdf-filename {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6) var(--space-8);
+  width: 140px;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.pdf-filename:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+
 .toolbar-btn {
   padding: var(--space-6) var(--space-10);
   background: transparent;
